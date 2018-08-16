@@ -8,14 +8,13 @@ The `browser-stats.json` data is frivolous as this is a public repo. For actual 
 
 We need to tidy the data so it is in the following format:
 
-```
-Row Name 1, Row Name 2, Row Name 3,
-data 1A, data 1B ,data 1C
-data 2A, data 2B ,data 2C
-data 3A, data 3B ,data 3C
-data 4A, data 4B ,data 4C
-data 5A, data 5B ,data 5C
-```
+| Row Name 1 | Row Name 2 | Row Name 3 |
+| -----------|----------|----------|
+| data 1A | data 1B | data 1C |
+| data 2A | data 2B | data 2C |
+| data 3A | data 3B | data 3C |
+| data 4A | data 4B | data 4C |
+| data 5A | data 5B | data 5C |
 
 This can then be saved/exported as a .csv format.
 
