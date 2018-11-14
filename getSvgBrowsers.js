@@ -1,47 +1,40 @@
-const fs = require('fs');
+const fs = require("fs");
 
-const data = fs.readFileSync('./browser-stats.json');
+const data = fs.readFileSync("./browser-stats.json");
 
 let nonSvgBrowserCount = [];
 let serviceTotalBrowsers = [];
 
 const countNonSvgBrowsers = data => {
-  data.forEach(
-    item => {
+  data.forEach(item => {
+    addToDynamicallyKeyedArray(
+      item["bbc_site"],
+      item["Browsers"],
+      serviceTotalBrowsers
+    );
+
+    if (isIE8orLower(item["Web browser"]) || isAndroid2(item["Web browser"])) {
       addToDynamicallyKeyedArray(
-        item['app_name'],
-        item['Browsers'],
-        serviceTotalBrowsers
+        item["bbc_site"],
+        item["Browsers"],
+        nonSvgBrowserCount
       );
-
-      if (
-        isIE8orLower(item['Web browser']) ||
-        isAndroid2(item['Web browser'])
-      ) {
-        addToDynamicallyKeyedArray(
-          item['app_name'],
-          item['Browsers'],
-          nonSvgBrowserCount
-        );
-      }
     }
-  );
+  });
 
-  Object.keys(nonSvgBrowserCount).forEach(
-    function(service) {
-      const percentageOfNonSvgBrowsers = (nonSvgBrowserCount[service] / serviceTotalBrowsers[service]) * 100;
+  Object.keys(nonSvgBrowserCount).forEach(function(service) {
+    const percentageOfNonSvgBrowsers =
+      (nonSvgBrowserCount[service] / serviceTotalBrowsers[service]) * 100;
 
-      // if the percentage value is above our support threshold
-      if (percentageOfNonSvgBrowsers.toFixed(3) > '0.05') {
-        console.log(`Service: ${service}`);
-        console.log(`  Total Browsers: ${serviceTotalBrowsers[service]}`);
-        console.log(`  Non Svg Browsers: ${nonSvgBrowserCount[service]}`);
-        console.log(`  Percentage: ${percentageOfNonSvgBrowsers.toFixed(3)}`);
-      }
+    // if the percentage value is above our support threshold
+    if (percentageOfNonSvgBrowsers.toFixed(3) > "0.05") {
+      console.log(`Service: ${service}`);
+      console.log(`  Total Browsers: ${serviceTotalBrowsers[service]}`);
+      console.log(`  Non Svg Browsers: ${nonSvgBrowserCount[service]}`);
+      console.log(`  Percentage: ${percentageOfNonSvgBrowsers.toFixed(3)}`);
     }
-  );
+  });
 };
-
 
 /*
   This method allows an empty array to be populated with values that have matching keys.
@@ -54,7 +47,7 @@ const addToDynamicallyKeyedArray = (key, value, array) => {
     array[key] = value;
   } else {
     // if the service is already a key in the array just add the value
-    array[key] += value
+    array[key] += value;
   }
 };
 
