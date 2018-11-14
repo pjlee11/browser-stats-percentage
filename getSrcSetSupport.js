@@ -25,16 +25,31 @@ const countNonSrcsetBrowsers = data => {
   console.log("| Service                     | Percentage |");
   console.log("| --------------------------- | ---------- |");
   Object.keys(nonSrcsetBrowserCount).forEach(function(service) {
-    const percentageOfNonSrcsetBrowsers =
-      (nonSrcsetBrowserCount[service] / serviceTotalBrowsers[service]) * 100;
+    /* 
+      ignore the `bbc_site` values
+      NB: korean/downloads bug, should report as `news-ws-korean` therefore ignore the results
+    */
+    if (
+      service != "korean" &&
+      service != "invalid-data" &&
+      service != "aboutthebbc" &&
+      service != "new" &&
+      service != "news-w" &&
+      service != "news-ws-ar" &&
+      service != "news-ws-ara" &&
+      service != "schoolreport"
+    ) {
+      const percentageOfNonSrcsetBrowsers =
+        (nonSrcsetBrowserCount[service] / serviceTotalBrowsers[service]) * 100;
 
-    // if the percentage value is above our support threshold
-    if (percentageOfNonSrcsetBrowsers.toFixed(3) > "0.05") {
-      console.log(
-        `| ${service}              | ${percentageOfNonSrcsetBrowsers.toFixed(
-          3
-        )}     |`
-      );
+      // if the percentage value is above our support threshold
+      if (percentageOfNonSrcsetBrowsers.toFixed(3) > "0.05") {
+        console.log(
+          `| ${service}              | ${percentageOfNonSrcsetBrowsers.toFixed(
+            3
+          )}     |`
+        );
+      }
     }
   });
 };
