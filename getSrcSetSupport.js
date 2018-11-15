@@ -2,28 +2,33 @@ const fs = require("fs");
 
 const data = fs.readFileSync("./browser-stats.json");
 
-let nonSrcsetBrowserCount = [];
-let serviceTotalBrowsers = [];
+let nonSrcsetBrowserCount = {};
+let serviceTotalBrowsers = {};
+
+const getPercentagePerBrowser = (views, service) =>
+  ((views / serviceTotalBrowsers[service]) * 100).toFixed(3);
 
 const countNonSrcsetBrowsers = data => {
   data.forEach(item => {
-    addToDynamicallyKeyedArray(
-      item["bbc_site"],
-      item["Browsers"],
-      serviceTotalBrowsers
-    );
+    countAllViews(item["bbc_site"], item["Browsers"], serviceTotalBrowsers);
 
     if (passesRequirements(item["Web browser"])) {
       addToDynamicallyKeyedArray(
         item["bbc_site"],
+        item["Operating system"],
+        item["Web browser"],
         item["Browsers"],
         nonSrcsetBrowserCount
       );
     }
   });
 
-  console.log("| Service                     | Percentage |");
-  console.log("| --------------------------- | ---------- |");
+  console.log(
+    "| Service                     | Browser           | Percentage |"
+  );
+  console.log(
+    "| --------------------------- | ----------------- | ---------- |"
+  );
   Object.keys(nonSrcsetBrowserCount).forEach(function(service) {
     /* 
       ignore the `bbc_site` values
@@ -39,17 +44,19 @@ const countNonSrcsetBrowsers = data => {
       service != "news-ws-ara" &&
       service != "schoolreport"
     ) {
-      const percentageOfNonSrcsetBrowsers =
-        (nonSrcsetBrowserCount[service] / serviceTotalBrowsers[service]) * 100;
-
-      // if the percentage value is above our support threshold
-      if (percentageOfNonSrcsetBrowsers.toFixed(3) > "0.05") {
-        console.log(
-          `| ${service}              | ${percentageOfNonSrcsetBrowsers.toFixed(
-            3
-          )}     |`
+      // For each browser entry per service
+      Object.keys(nonSrcsetBrowserCount[service]).forEach(function(browser) {
+        const percentageOfNonSrcsetBrowsers = getPercentagePerBrowser(
+          nonSrcsetBrowserCount[service][browser],
+          service
         );
-      }
+
+        if (percentageOfNonSrcsetBrowsers > "0.05") {
+          console.log(
+            `| ${service}                  | ${browser}        | ${percentageOfNonSrcsetBrowsers} |`
+          );
+        }
+      });
     }
   });
 };
@@ -58,14 +65,30 @@ const countNonSrcsetBrowsers = data => {
   This method allows an empty array to be populated with values that have matching keys.
   It does this by checking if the key exists and either creating it or cumulatively adding to the key's value
 */
-const addToDynamicallyKeyedArray = (key, value, array) => {
+const addToDynamicallyKeyedArray = (
+  service,
+  operatingSystem,
+  browserName,
+  browserViews,
+  fullArray
+) => {
   // if the array doesn't have the service name as a key
-  if (!array.hasOwnProperty(key)) {
+  if (!fullArray.hasOwnProperty(service)) {
+    fullArray[service] = {};
+  }
+  const details = `${operatingSystem} - ${browserName}`;
+
+  fullArray[service][details] = browserViews;
+};
+
+const countAllViews = (service, browserViews, countArray) => {
+  // if the array doesn't have the service name as a key
+  if (!countArray.hasOwnProperty(service)) {
     // add a new array key with the value
-    array[key] = value;
+    countArray[service] = browserViews;
   } else {
     // if the service is already a key in the array just add the value
-    array[key] += value;
+    countArray[service] += browserViews;
   }
 };
 
