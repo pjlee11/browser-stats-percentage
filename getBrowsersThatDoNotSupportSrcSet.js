@@ -35,6 +35,7 @@ const countNonSrcsetBrowsers = data => {
     */
     if (
       service != "korean" &&
+      service != "Total" &&
       service != "invalid-data" &&
       service != "aboutthebbc" &&
       service != "new" &&
