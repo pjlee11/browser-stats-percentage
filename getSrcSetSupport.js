@@ -15,7 +15,6 @@ const countNonSrcsetBrowsers = data => {
     if (passesRequirements(item["Web browser"])) {
       addToDynamicallyKeyedArray(
         item["bbc_site"],
-        item["Operating system"],
         item["Web browser"],
         item["Browsers"],
         nonSrcsetBrowserCount
@@ -61,24 +60,38 @@ const countNonSrcsetBrowsers = data => {
   });
 };
 
+const stripBrowserVersion = name => {
+  let strippedName = name;
+
+  strippedName = strippedName.replace(".x", "");
+  strippedName = strippedName.replace(/[0-9]/, "");
+  strippedName = strippedName.replace(/[0-9]/, "");
+  strippedName = strippedName.replace(/[0-9]/, "");
+  return strippedName;
+};
+
 /*
   This method allows an empty array to be populated with values that have matching keys.
   It does this by checking if the key exists and either creating it or cumulatively adding to the key's value
 */
 const addToDynamicallyKeyedArray = (
   service,
-  operatingSystem,
   browserName,
   browserViews,
   fullArray
 ) => {
+  const browserNameWithoutVersion = stripBrowserVersion(browserName);
+
   // if the array doesn't have the service name as a key
   if (!fullArray.hasOwnProperty(service)) {
     fullArray[service] = {};
   }
-  const details = `${operatingSystem} - ${browserName}`;
 
-  fullArray[service][details] = browserViews;
+  if (!fullArray[service].hasOwnProperty(browserNameWithoutVersion)) {
+    fullArray[service][browserNameWithoutVersion] = browserViews;
+  }
+
+  fullArray[service][browserNameWithoutVersion] += browserViews;
 };
 
 const countAllViews = (service, browserViews, countArray) => {
@@ -99,55 +112,54 @@ const passesRequirements = browser =>
   isOperaMobile(browser) ||
   isBlackberryBrowser(browser) ||
   isSafariLessThan7(browser) ||
+  isEdge12to15(browser) ||
   isOperaLessThan20(browser);
 
 const isIE11orLower = browser => {
   var regex = /IE ([1-9]|10|11)\.x/g;
-  if (browser.match(regex)) {
-    return true;
-  }
+  return regexMatch(regex, browser);
 };
 
 const isAndroidLessThan4 = browser => {
   var regex = /Android Browser [1-4]/g;
-  if (browser.match(regex)) {
-    return true;
-  }
+  return regexMatch(regex, browser);
 };
 
 const isOperaMini = browser => {
   var regex = /Opera Mini /g;
-  if (browser.match(regex)) {
-    return true;
-  }
+  return regexMatch(regex, browser);
 };
 
 const isOperaMobile = browser => {
   var regex = /Opera Mobile ([1-9]|10|11|12)/g;
-  if (browser.match(regex)) {
-    return true;
-  }
+  return regexMatch(regex, browser);
 };
 
 const isOperaLessThan20 = browser => {
   var regex = /Opera (1[0|9]|20)/g;
-  if (browser.match(regex)) {
-    return true;
-  }
+  return regexMatch(regex, browser);
 };
 
 const isBlackberryBrowser = browser => {
   var regex = /BlackBerry Browser/g;
-  if (browser.match(regex)) {
-    return true;
-  }
+  return regexMatch(regex, browser);
 };
 
 const isSafariLessThan7 = browser => {
   var regex = /Safari [3-7]/g;
+  return regexMatch(regex, browser);
+};
+
+const isEdge12to15 = browser => {
+  var regex = /Edge 1([2|3|4|5])/g;
+  return regexMatch(regex, browser);
+};
+
+const regexMatch = (regex, browser) => {
   if (browser.match(regex)) {
     return true;
   }
+  return false;
 };
 
 countNonSrcsetBrowsers(JSON.parse(data));
