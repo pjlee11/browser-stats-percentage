@@ -1,9 +1,10 @@
 bbc_site,Operating system,Web browser,Browsers,Visits,Page views
-news,iOS 12,Safari 12.x,111,111,111
-news,iOS 12,Chrome for iOS 68.x,222,222,222
-news,iOS 12,Facebook for iPhone 63.x,333,333,333
-news-ws-yoruba,Android 5,Facebook for Android 73.x,444,444,444
-news-ws-igbo,BlackBerry OS Touch,BlackBerry Browser 10.x,555,555,555
-news-ws-igbo,Windows XP,Firefox 52.x,666,666,666
-schoolreport,Android 6,Chrome 68.x,777,777,777
-schoolreport,Android 5,Chrome 69.x,888,888,888
+news,iOS 12,Safari 12.x,200,200,200
+news,iOS 12,Chrome for iOS 68.x,500,500,500
+news,iOS 12,Facebook for iPhone 63.x,300,300,300
+news-ws-yoruba,Android 5,hrome for iOS 68.x,100,100,100
+news-ws-yoruba,Android 5,Facebook for Android 73.x,300,300,300
+news-ws-igbo,BlackBerry OS Touch,BlackBerry Browser 10.x,500,500,500
+news-ws-igbo,Windows XP,Firefox 52.x,700,700,700
+schoolreport,Android 6,Chrome 68.x,100,100,100
+schoolreport,Android 5,Chrome 69.x,100,100,100
