@@ -1,0 +1,28 @@
+{
+  "name": "browser-stats-percentage",
+  "version": "0.0.1",
+  "description": "Browser Stats Percentage",
+  "scripts": {
+    "csvtojson": "node scripts/convertCSVtoJSON.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:pjlee11/browser-stats-percentage.git"
+  },
+  "keywords": [
+    "BBC",
+    "Article",
+    "Browser stats",
+    "Data"
+  ],
+  "author": "Phil Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pjlee11/browser-stats-percentage/issues"
+  },
+  "homepage": "https://github.com/pjlee11/browser-stats-percentage#readme",
+  "dependencies": {
+    "csvtojson": "^2.0.8"
+  },
+  "devDependencies": {}
+}
