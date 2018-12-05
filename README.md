@@ -38,7 +38,7 @@ This logs the percentage each operating system makes up of the total viewership 
 
 This logs the percentage each browser and operating system makes up of the total viewership per service.
 
-## I don't get this repo
+## I really don't get this repo
 
 1. Copy and paste the following into a new local file called `browser-stats.csv`.
 
