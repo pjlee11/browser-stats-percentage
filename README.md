@@ -40,20 +40,7 @@ This logs the percentage each browser and operating system makes up of the total
 
 ## I really don't get this repo
 
-1. Copy and paste the following into a new local file called `browser-stats.csv`.
-
-```
-bbc_site,Operating system,Web browser,Browsers,Visits,Page views
-news,iOS 12,Safari 12.x,200,200,200
-news,iOS 12,Chrome for iOS 68.x,500,500,500
-news,iOS 12,Facebook for iPhone 63.x,300,300,300
-news-ws-yoruba,Android 5,hrome for iOS 68.x,100,100,100
-news-ws-yoruba,Android 5,Facebook for Android 73.x,300,300,300
-news-ws-igbo,BlackBerry OS Touch,BlackBerry Browser 10.x,500,500,500
-news-ws-igbo,Windows XP,Firefox 52.x,700,700,700
-schoolreport,Android 6,Chrome 68.x,100,100,100
-schoolreport,Android 5,Chrome 69.x,100,100,100
-```
+1. Rename `browser-stats-example.csv` to `browser-stats.csv`
 
 2. `npm run csvtojson`
 
