@@ -1,6 +1,8 @@
-# Calculating the non-svg browser support
+# Installing
 
-To run clone this repo and run `node getSvgBrowsers.js`.
+`git clone git@github.com:pjlee11/browser-stats-percentage.git`
+`cd browser-stats-percentage`
+`npm install`
 
 ## Running against real data sets
 
@@ -16,10 +18,22 @@ We need to tidy the data so it is in the following format:
 | data 4A | data 4B | data 4C |
 | data 5A | data 5B | data 5C |
 
-This can then be saved/exported as a .csv format.
+This can then be saved/exported as a .csv format. See `browser-stats-example.csv` for a detailed example of the desired format. 
 
-Once the data is in a .csv format we can convert it to JSON using a tool such as https://shancarter.github.io/mr-data-converter/. I then also suggest to run the data through a linter such as https://jsonlint.com/.
+Once the data is in a .csv format we can add it to our local copy of this repo saving it with the filename `browser-stats.csv`. Then we can run the command `npm run csvtojson` to convert the file into JSON. 
 
-We can now copy the valid JSON formatted data and save it as `browser-stats.json`.
+Following this we can now run the commands to get browser and OS percentages per service.
 
-Now from terminal the command `node getSvgBrowsers.js` should run against the real data set.
+## Commands
+
+### `npm run getBrowserPercentages`
+
+This logs the percentage each browser makes up of the total viewership per service.
+
+### `npm run getOSPercentages`
+
+This logs the percentage each operating system makes up of the total viewership per service.
+
+### `npm run getBrowserAndOSPercentages`
+
+This logs the percentage each browser and operating system makes up of the total viewership per service.
