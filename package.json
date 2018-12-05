@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "Browser Stats Percentage",
   "scripts": {
-    "csvtojson": "node scripts/convertCSVtoJSON.js"
+    "csvtojson": "node scripts/convertCSVtoJSON.js",
+    "getBrowserPercentages": "node scripts/getBrowserPercentages.js",
+    "getBrowserAndOSPercentages": "node scripts/getBrowserAndOSPercentages.js",
+    "getOSPercentages": "node scripts/getOSPercentages.js"
   },
   "repository": {
     "type": "git",
