@@ -1,8 +1,8 @@
 # Installing
 
-`git clone git@github.com:pjlee11/browser-stats-percentage.git`
-`cd browser-stats-percentage`
-`npm install`
+- `git clone git@github.com:pjlee11/browser-stats-percentage.git`
+- `cd browser-stats-percentage`
+- `npm install`
 
 ## Running against real data sets
 
