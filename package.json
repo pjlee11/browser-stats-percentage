@@ -4,6 +4,7 @@
   "description": "Browser Stats Percentage",
   "scripts": {
     "csvtojson": "node scripts/convertCSVtoJSON.js",
+    "getLowestSupportedBrowserVersion": "node scripts/getSupportedBrowserVersions.js",
     "getBrowserPercentages": "node scripts/getBrowserPercentages.js",
     "getBrowserAndOSPercentages": "node scripts/getBrowserAndOSPercentages.js",
     "getOSPercentages": "node scripts/getOSPercentages.js"
