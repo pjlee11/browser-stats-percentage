@@ -38,6 +38,10 @@ This logs the percentage each operating system makes up of the total viewership 
 
 This logs the percentage each browser and operating system makes up of the total viewership per service.
 
+### `getLowestSupportedBrowserVersion`
+
+This gives a breakdown of the browser verions that meet our support threshold for each service.
+
 ## I really don't get this repo
 
 1. Rename `browser-stats-example.csv` to `browser-stats.csv`
