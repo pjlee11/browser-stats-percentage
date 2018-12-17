@@ -8,7 +8,7 @@ const splitVersionFromBrowser = browserNameWithVersion => {
   const versionRegex = / ([0-9]+)/;
 
   // default the version to empty string for things like "Safari" or "Chrome"
-  let version = "";
+  let version = "misc";
   // return the full values for things that don't have a number version like "Safari" or "MAUI WAP Browser"
   let browserName = browserNameWithVersion;
 

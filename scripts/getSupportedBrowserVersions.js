@@ -55,7 +55,13 @@ const getBrowserWithLowestSupportVersions = () => {
 
     browsers.forEach(browser => {
       const browserVersions = data[service][browser];
-      const lowestVersion = Math.min.apply(null, browserVersions);
+
+      // currently not sure how to handle 'misc' when the version isn't supplied this will be addressed in the future
+      const browserVersionsWithoutMisc = browserVersions.filter(
+        version => version !== "misc"
+      );
+
+      const lowestVersion = Math.min.apply(null, browserVersionsWithoutMisc);
 
       console.log(
         `| ${service}        | ${browser}           | ${lowestVersion}    |`
@@ -65,3 +71,35 @@ const getBrowserWithLowestSupportVersions = () => {
 };
 
 getBrowserWithLowestSupportVersions();
+
+/* The following code logs out all the versions for each browser not just the lowest
+
+const getBrowserWithAllSupportVersions = () => {
+  const data = getDataWithBrowsersAndVersionArray;
+
+  console.log(
+    "| Service                     | Browser           | Versions    |"
+  );
+  console.log(
+    "| --------------------------- | ----------------- | ---------- |"
+  );
+
+  const services = Object.keys(data);
+
+  services.forEach(service => {
+    const browsers = Object.keys(data[service]);
+
+    browsers.forEach(browser => {
+      const browserVersions = data[service][browser];
+
+      const readableBrowserVersions = browserVersions
+        .sort((a, b) => a - b) // sort numbers ascending
+        .join(", ");
+
+      console.log(
+        `| ${service}        | ${browser}           | ${readableBrowserVersions}    |`
+      );
+    });
+  });
+};
+*/
